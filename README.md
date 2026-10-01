@@ -4,7 +4,7 @@ The checklist I run before any AI agent talks to customers. Five stages, each sa
 
 **An agent is ready when it passes tests written before it was built. A high score on a test its builder wrote afterwards doesn't count.**
 
-One-page overview: [Agent Launch Standard at a glance](https://claude.ai/artifact/ANJZa9WRhP1KotKTaofWp6).
+One-page overview: [at a glance](https://claude.ai/artifact/ANJZa9WRhP1KotKTaofWp6) · 30-second walkthrough: [Loom video](https://www.loom.com/share/3644c72b6b7e4836be29eadec9a4a8c8).
 
 ## Who this is for
 

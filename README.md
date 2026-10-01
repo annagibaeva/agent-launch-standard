@@ -4,6 +4,8 @@ The checklist I run before any AI agent talks to customers. Five stages (Design,
 
 **An agent is ready when it clears gates written before it was built, not when it scores well on a test its builder wrote.**
 
+One-page overview: [Agent Launch Standard at a glance](https://claude.ai/artifact/ANJZa9WRhP1KotKTaofWp6).
+
 ## Who this is for
 
 | File | Reader | Use it to |

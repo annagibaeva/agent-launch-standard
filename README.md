@@ -21,7 +21,7 @@ The checklist I run before any AI agent talks to customers. Five stages (Design,
 
 **1. Severity budgets.** Tolerance follows damage: the most damaging failure gets zero, an honest miss gets a budget. In [payments-harness](https://github.com/annagibaeva/payments-harness/blob/f107e59a65b0e803f7e922e0d63ec944a8c26fe0/README.md#L50), raising temperature from 0 to 1 left accuracy passing at 0.973 while the hallucination gate failed: the assistant made up a fee. A single accuracy score would have shipped it.
 
-**2. Conjunctive gates.** The win condition is an AND of clauses, each chosen to block the cheap way to pass another. Refusing everything fails recall. Answering everything fails hallucination. Escalating everything fails handoff precision. In [wismo-returns](https://github.com/annagibaeva/wismo-returns-reliability-agent/blob/9e0fdb7fe703c2d7867a97c53d015547959ff838/README.md#L196), switching the grounding gate on took hallucination from 7% to 0% and resolution precision from 91% to 100% while recall held at 93%. The price was containment, down from 72% to 66%. That price gets published.
+**2. Conjunctive gates.** The win condition is an AND of clauses, each chosen to block the cheap way to pass another. Refusing everything fails recall, answering everything fails hallucination, and escalating everything fails handoff precision. In [wismo-returns](https://github.com/annagibaeva/wismo-returns-reliability-agent/blob/9e0fdb7fe703c2d7867a97c53d015547959ff838/README.md#L196), switching the grounding gate on took hallucination from 7% to 0% and resolution precision from 91% to 100% while recall held at 93%. The price, published rather than hidden, was containment: down from 72% to 66%.
 
 **3. Eval sufficiency.** A perfect score does not close Eval. It means the test is not hard enough yet. [Return-and-Exchange](https://github.com/annagibaeva/Return-and-Exchange-agent/blob/09c28d95f55146c2301754b799f05ee619f542a6/docs/case-study.md#L239) passed 10/10 core cases on every one of five runs. On [τ²-bench retail](https://github.com/annagibaeva/Return-and-Exchange-agent/blob/09c28d95f55146c2301754b799f05ee619f542a6/docs/tau2-teardown.md#L7), a public customer-service agent benchmark that grades the final database state, it passed 59/114 (52%). Aligning its tools and switching off its supervisor layer brought it to 92/114 (81%).
 
@@ -47,7 +47,7 @@ Five numbers decide go / no-go and set the rollback triggers:
 4. **Safety-routing recall:** 100%.
 5. **Cost per resolution:** at or below the human baseline.
 
-Containment sits beside them, reported but never gated, so the cost of safety stays visible. Guardrail metrics such as action-claim integrity, pass^k and regression delta also block. Defaults are starting points; Design records the reason for each agent's numbers. Definitions and minimum sample sizes: [metrics.md](docs/metrics.md).
+Containment is reported next to them but never gated, so the cost of safety stays visible. Guardrail metrics such as action-claim integrity, pass^k and regression delta also block. Defaults are starting points; Design records the reason for each agent's numbers. Definitions and minimum sample sizes: [metrics.md](docs/metrics.md).
 
 ## Risk tiers
 
@@ -59,7 +59,7 @@ Budgets follow what the agent can do, not its domain.
 | 2 · Act | write to systems of record | ≤2% | 0 | 100% | irreversible writes |
 | 3 · Regulated | touch money, identity, health or legal status | 0 | 0 | 100%, higher k before each release | refunds, credits, disputes |
 
-Applied after the fact: order tracking is Tier 1, returns Tier 2, and a payments assistant Tier 3: it is read-only, but a fabricated financial fact is a compliance event.
+Applied after the fact: order tracking is Tier 1, returns Tier 2. A read-only payments assistant is still Tier 3, because a fabricated financial fact is a compliance event.
 
 ## Scorecard
 
@@ -73,7 +73,7 @@ Exercised criteria met, out of those that apply to each build. Each cell links t
 
 No build closes any stage: proposed criteria and sign-offs are unmet everywhere. Eval stays open even on exercised criteria: payments-harness scored accuracy 1.000 on its own tasks and never faced an external test, so Rule 3 holds it open.
 
-Not exercised by any of these builds: human baseline, written acceptance, risk tier, integration checks, sandbox run, staged rollout, rollback triggers, kill switch, monitoring, named sign-off, second labeler, directional labeling, production failures fed back into the gold set. They stay in the standard marked as proposed: the builds showed where they would be needed, and none has exercised them yet.
+Not exercised by any of these builds: human baseline, written acceptance, risk tier, integration checks, sandbox run, staged rollout, rollback triggers, kill switch, monitoring, named sign-off, second labeler, directional labeling, production failures fed back into the gold set. They stay in, marked proposed. τ²-bench's integration failures are why integration checks exist; WISMO's self-grading is why the second labeler does.
 
 ## Known limits
 
